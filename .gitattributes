@@ -1,2 +1,2 @@
-* linguist-vendored
+*.* linguist-detectable=false
 *.clj linguist-detectable=true
