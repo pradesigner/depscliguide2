@@ -24,3 +24,11 @@ There is a copy of hello.clj in time-lib/src/ as well, just to make sure the jav
 │       └── sayhello.clj  
 
 which is just another test to make sure java-time could be found (nolib/deps.edn and time-lib/deps.edn are the same file). It has nothing to do with what the Using local libraries instructions are.
+
+**Solved!**
+
+The problem was solved by Sean Corfield who wondered if I had a :deps in the global deps.edn file referring to the earlier version. That :deps takes priority over the other deps.edn files and so, we were looking for v1.2.0, but the global file kept giving v0.3.2 and resulted in the error.
+
+The problem didn't exist when we didn't have a local deps asking for v1.2.0 directly, but if a local deps asks another local deps, it seems to get overriden by the global deps.
+
+Sean also emphasized that we shouldn't use :deps in the global deps.edn file!
